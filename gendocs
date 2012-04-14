@@ -1,0 +1,1 @@
+phpdoc -f jetPhpFormatter.php -t docs/earthli -o "HTML:frames:earthli"   -t docs/leet    -o "HTML:frames:l0l33t" 

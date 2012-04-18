@@ -18,7 +18,7 @@ class SourceDocClassTest extends PHPUnit_Framework_TestCase
     
     public function testParseFileNumOfTokensMatches()
     {
-        $file = 'testFile3.php';
+        $file = __DIR__ . '/testFile3.php';
         $doc = new SourceDoc(); 
         $doc->parseFile($file);
         $numTokenObjects = $doc->numOfTokens();

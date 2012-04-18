@@ -8,13 +8,13 @@
   </php>
 
   <logging>
-    <!--
+    
     <log lowUpperBound="35" highLowerBound="70" yui="true" highlight="true" charset="UTF-8" 
-         target="/home/scholar/public_html/tests/reports/dv/autocoverage"  type="coverage-html"/>
-    <log target="/home/scholar/public_html/tests/reports/dv/coverage.xml"  type="coverage-clover" />
-    <log target="/home/scholar/public_html/tests/reports/dv/logfile.tap"   type="tap" />
-    <log target="/home/scholar/public_html/tests/reports/dv/testdox.html"  type="testdox-html"/>
-    <log target="/home/scholar/public_html/tests/reports/dv/testdox.txt"   type="testdox-text" />
-    -->
+         target="reports/autocoverage"  type="coverage-html"/>
+    <log target="reports/coverage.xml"  type="coverage-clover" />
+    <log target="reports/logfile.tap"   type="tap" />
+    <log target="reports/testdox.html"  type="testdox-html"/>
+    <log target="reports/testdox.txt"   type="testdox-text" />
+    
   </logging>
 </phpunit>

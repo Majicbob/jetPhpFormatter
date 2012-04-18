@@ -12,13 +12,15 @@
 
 function testingAutoloader($name) 
 {
-    //echo "\n $name \n";
+    //echo "\n Autoloading $name \n";
     $name = str_replace('jet\Formatter\\', '', $name);
-    $file = __DIR__ . "/../$name.class.php";
+    $file = __DIR__ . "/../src/classes/$name.class.php";
     
     if (is_file($file)) {
-        //echo "\n $file \n";
         include $file;
-    }    
+    }
+    else {
+        echo "\n $file \n";
+    }
 }
 spl_autoload_register('testingAutoLoader');

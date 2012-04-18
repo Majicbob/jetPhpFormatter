@@ -1,3 +1,4 @@
 *.tmp
 docs
 gendocs.bat
+tests/reports

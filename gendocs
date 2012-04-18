@@ -1,2 +1,3 @@
-phpdoc -f jetPhpFormatter.php -t docs/earthli -o "HTML:frames:earthli"   
-phpdoc -d src                 -t docs/leet    -o "HTML:frames:l0l33t" 
+phpdoc -d src   -t docs/earthli  -o "HTML:frames:earthli"   
+phpdoc -d src   -t docs/leet     -o "HTML:frames:l0l33t" 
+phpdoc -d src   -t docs/phpdoc   -o "HTML:frames:phpdoc.de" 

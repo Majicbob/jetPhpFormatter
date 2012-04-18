@@ -3,18 +3,35 @@
  * Calculates project code stats and displays as webpage
  */ 
 
-function phpcpd()
+function outputFromCommand($cmd)
 {   
-    $cpd;
-    exec('phpcpd src/', $cpd);
+    $output;
+    exec($cmd, $output);
 
-    $phpcpdResults = '';
-    foreach ($cpd as $line) {
-        $phpcpdResults .= "$line \n";
+    $results = '';
+    foreach ($output as $line) {
+        $results .= "$line \n";
     }
     
-    echo $phpcpdResults;
+    return $results;
 }
+
+function getAllResults()
+{
+    $commands = array(
+        'phpunit --testdox -c tests\phpunit.xml tests', 
+        'phploc src/',
+        'phpcpd src/',
+        'phpcs src\ --report-width=110 --standard=Sebastian'
+    );
+    $results = array();
+    foreach ($commands as $cmd) {
+        $results[] = outputFromCommand($cmd);
+    }
+    return $results;
+}
+
+$results = getAllResults();
 
 ?>
 
@@ -27,7 +44,7 @@ function phpcpd()
         div {
             background-color:#ffebd4;
             border:1px solid black;
-            margin:0 50px 10px 10px;
+            margin: 25px 10px;
             overflow:auto;
             padding:2px 10px;
         }
@@ -35,8 +52,12 @@ function phpcpd()
   </head>
   
   <body>
-    <div>
-        <pre><?php phpcpd(); ?></pre>
-    </div>
+  
+    <?php foreach ($results as $result) { ?>
+        <div>
+            <pre><?php echo $result; ?></pre>
+        </div>
+    <?php } ?>
+    
   </body>
 </html>

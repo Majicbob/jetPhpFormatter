@@ -42,6 +42,14 @@ class SourceDoc
     }
     
     /**
+     * @return int Number of parsed tokens
+     */
+    public function numOfTokens()
+    {
+        return count($this->tokens);
+    }
+    
+    /**
      * Prints token line number, trimmed value, name and code 
      */
     function printTokenInfo()

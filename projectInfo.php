@@ -19,10 +19,10 @@ function outputFromCommand($cmd)
 function getAllResults()
 {
     $commands = array(
-        'phpunit --testdox -c tests\phpunit.xml tests', 
+        'phpunit --testdox -c tests/phpunit.xml tests', 
         'phploc src/',
         'phpcpd src/',
-        'phpcs src\ --report-width=110 --standard=Sebastian'
+        'phpcs src/ --report-width=110 --standard=Sebastian'
     );
     $results = array();
     foreach ($commands as $cmd) {

@@ -23,4 +23,15 @@ class TokenClassTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(!empty($t->name));
         $this->assertEquals('T_OPEN_TAG', $t->name);
     }
+    
+    public function testBracesAreBeingHandledCorrectly()
+    {
+        $rawTokens = token_get_all('<?php function bob() { }');
+        var_dump($rawTokens);
+        
+        $token = new Token($rawTokens[7]); // {
+        echo $token;
+        $token->name = 'Open Brace';
+        echo $token;
+    }
 }

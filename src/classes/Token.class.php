@@ -8,6 +8,7 @@
  *
  * @package  jetPhpFormatter
  * @author   John Tribolet <john@tribolet.info>
+ * @link     http://php.net/manual/en/tokens.php
  * @version  0.0.2
  * @since    00:37 Wednesday, March 28, 2012
  * @filesource
@@ -40,17 +41,32 @@ class Token
         $this->startPos = $offset + 1;
         //$new['trimVal']  = $new['value'] = $token;
 
-        // token_get_all creates arrays for all except some single char tokens
-        // like braces, brakets, parens
         if (is_array($tokenInfo)) {
             $this->code    = (int)$tokenInfo[0];
             $this->name    = token_name($this->code);
             $this->value   = $tokenInfo[1];
             $this->lineNum = $tokenInfo[2];
         }
+        else {
+            // token_get_all creates arrays for all except some single char tokens
+            // like braces, brakets, parens
+            $this->value = $tokenInfo; 
+        }
 
         $this->length = strlen($this->value);
         $this->endPos = $offset + $this->length;
+    }
+    
+    public function __toString()
+    {
+        $name = sprintf("%s", $this->name, $this->code);
+
+
+        return sprintf("
+                #%03d %03d  %03d-%03d  %26s  %s",
+                $this->lineNum, $this->length, 
+                $this->startPos, $this->endPos,
+                $this->trimVal(), $name);
     }
 
     public function trimVal()
@@ -59,6 +75,11 @@ class Token
         $replaceWith = array('\r', '\n', '\t');
         $shorten     = substr($this->value, 0, 25);
         return str_replace($noDisplay, $replaceWith, $shorten);
+    }
+    
+    public function isWhitespace()
+    {
+        return ($this->code == T_WHITESPACE);
     }
 
 

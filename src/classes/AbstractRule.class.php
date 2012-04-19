@@ -31,6 +31,6 @@ abstract class AbstractRule
      * 
      * @returns array Tokens with rule applied 
      */
-    abstract public function apply($tokens) {}
+    abstract public function apply($tokens);
     
 }

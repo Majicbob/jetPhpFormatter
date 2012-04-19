@@ -13,12 +13,15 @@
  * @filesource
  */
 
+namespace jet\Formatter;
+
 require_once(__DIR__ . '/../tests/bootstrap.php');
-use jet\Formatter\Token as Token;
 
 $testDir   = __DIR__ . '/../tests';
 $testFile  = "$testDir/testFile.php";
 $testFile2 = "$testDir/testFile2.php";
 $testFile3 = "$testDir/testFile3.php";
 
-printDetailedTokenInfo(file_get_contents($testFile3));
+$doc = new SourceDoc();
+$doc->parseFile($testFile3);
+$doc->printTokenInfo();

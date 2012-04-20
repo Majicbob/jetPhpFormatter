@@ -1,7 +1,7 @@
 <?php
 /**
- * Token class unit tests 
- * 
+ * Token class unit tests
+ *
  * @package  Tests
  * @author   John Tribolet <john@tribolet.info>
  * @filesource
@@ -15,23 +15,19 @@ class TokenClassTest extends PHPUnit_Framework_TestCase
     {
         $t = new Token(null);
     }
-    
+
     public function testConstructWithItemFromGetAllMethod()
     {
-        $tokens = token_get_all('<?php');
+        $tokens = token_get_all("<?php echo 'bob'; ?>");
         $t = new Token($tokens[0]);
         $this->assertTrue(!empty($t->name));
         $this->assertEquals('T_OPEN_TAG', $t->name);
     }
-    
+
     public function testBracesAreBeingHandledCorrectly()
     {
         $rawTokens = token_get_all('<?php function bob() { }');
-        var_dump($rawTokens);
-        
         $token = new Token($rawTokens[7]); // {
-        echo $token;
-        $token->name = 'Open Brace';
-        echo $token;
+        $this->assertEquals('{', $token->value);
     }
 }

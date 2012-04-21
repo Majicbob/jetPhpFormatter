@@ -51,9 +51,18 @@ class SourceDoc
      *
      * @param string code
      */
-    public function parseFile($code)
+    public function parseString($code)
     {
         $this->tokens = $this->getTokens($code);
+    }
+    
+    public function newTokensToString()
+    {
+        $newDoc = '';
+        foreach ($this->newTokens as $t) {
+            $newDoc .= $t->value;            
+        }
+        return $newDoc;
     }
     
     /**
@@ -61,10 +70,7 @@ class SourceDoc
      */
     public function writeNewFile($filePath)
     {
-        $newDoc = '';
-        foreach ($this->newTokens as $t) {
-            $newDoc .= $t->value;            
-        }
+        $newDoc = $this->newTokensToString();
         file_put_contents($filePath, $newDoc); 
     }
 

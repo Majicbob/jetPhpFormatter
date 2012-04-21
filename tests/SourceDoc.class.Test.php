@@ -32,11 +32,31 @@ class SourceDocClassTest extends PHPUnit_Framework_TestCase
     
     public function testAddRule()
     {
+        $doc = $this->getSourceDocWithNoWhitespaceRule();
+        $addedRule = $doc->rules[0];
+        $this->assertTrue($addedRule instanceof jet\Formatter\AbstractRule);
+    }
+    
+    public function testApplyRules()
+    {
+        $doc = $this->getSourceDocWithNoWhitespaceRule();
+        $file = __DIR__ . '/testFile3.php';
+        $doc->parseFile($file); 
+        
+        $doc->applyRules();
+        $newTokens = $doc->getNewTokens();
+        
+        $numOldTokens = count($doc->getOrigTokens());
+        $numNewTokens = count($doc->getNewTokens()); 
+        
+        $this->assertTrue($numOldTokens > $numNewTokens);
+    }
+    
+    protected function getSourceDocWithNoWhitespaceRule()
+    {
         $doc = new SourceDoc();
         $rule = new jet\Formatter\NoWhitespaceRule();
         $doc->addRule($rule);
-        $addedRule = $doc->rules[0]; 
-        $this->assertTrue($addedRule instanceof jet\Formatter\AbstractRule);
-        
+        return $doc;
     }
 }

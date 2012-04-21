@@ -29,6 +29,11 @@ class SourceDoc
      * @var array Array of Token objects
      */
     protected $tokens;
+    
+    /**
+     * @var array Array of Token objects, applying rules return here 
+     */
+    protected $newTokens;
 
     /**
      * Reads given file and populates $tokens
@@ -59,15 +64,40 @@ class SourceDoc
         }
     }
 
+    /**
+     * Add new rule 
+     * 
+     * @todo Pull out to RuleManger or something
+     */
     public function addRule(AbstractRule $rule)
     {
         $this->rules[] = $rule;
     }
     
+    public function applyRules()
+    {
+        $this->newTokens = $this->tokens; 
+        foreach ($this->rules as $rule) {
+            $this->newTokens = $rule->apply($this->newTokens);
+        }
+    }
+    
+    public function getNewTokens()
+    {
+        return $this->newTokens;
+    }
+    
+    public function getOrigTokens()
+    {
+        return $this->tokens;
+    }
+    
     /**
      * Gets all tokens and looks ups symbolic name when avaliable
+     * 
      * @param  string  $code  PHP code to get detailed tokens from
      * @return array   Array of Token objects
+     * @todo Move to token class or token manager class? 
      */
     protected function getTokens($code)
     {

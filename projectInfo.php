@@ -1,6 +1,7 @@
 <?php
 /**
  * Calculates project code stats and displays as webpage
+ * 
  */ 
 
 function outputFromCommand($cmd)
@@ -37,6 +38,7 @@ $results = getAllResults();
 
 <html>
   <head>
+    <title>jetPhpFormatter Project Info</title>
     <style>
         body {
             background-color:#6699ff;

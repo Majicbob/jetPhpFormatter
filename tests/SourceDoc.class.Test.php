@@ -37,7 +37,7 @@ class SourceDocClassTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($addedRule instanceof jet\Formatter\AbstractRule);
     }
     
-    public function testApplyRules()
+    public function testApplyRulesUsingNoWhitespaceRule()
     {
         $doc = $this->getSourceDocWithNoWhitespaceRule();
         $file = __DIR__ . '/testFile3.php';
@@ -50,6 +50,24 @@ class SourceDocClassTest extends PHPUnit_Framework_TestCase
         $numNewTokens = count($doc->getNewTokens()); 
         
         $this->assertTrue($numOldTokens > $numNewTokens);
+    }
+    
+    public function testWriteNewFileWithAppliedRule()
+    {
+        $doc = $this->getSourceDocWithNoWhitespaceRule();
+        $file = __DIR__ . '/testFile3.php';
+        $doc->parseFile($file);
+        $doc->applyRules(); 
+        
+        $newFile = __DIR__ . '/testFile3.new.php';
+        $doc->writeNewFile($newFile);
+        
+        $newFileContents = file_get_contents($newFile);
+        $testCaseContents = file_get_contents(__DIR__ . '/testFile3.NoWhitespaceRule.php');
+        
+        $this->assertEquals($newFileContents, $testCaseContents); 
+        unlink($newFile);
+        
     }
     
     protected function getSourceDocWithNoWhitespaceRule()

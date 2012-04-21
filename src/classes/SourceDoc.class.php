@@ -45,6 +45,18 @@ class SourceDoc
         $code         = file_get_contents($filePath);
         $this->tokens = $this->getTokens($code);
     }
+    
+    /**
+     * Writes out $this->newTokens to file
+     */
+    public function writeNewFile($filePath)
+    {
+        $newDoc = '';
+        foreach ($this->newTokens as $t) {
+            $newDoc .= $t->value;            
+        }
+        file_put_contents($filePath, $newDoc); 
+    }
 
     /**
      * @return int Number of parsed tokens

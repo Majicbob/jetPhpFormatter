@@ -27,8 +27,12 @@ function getAllResults()
     );
     $results = array();
     foreach ($commands as $cmd) {
-        $results[] = outputFromCommand($cmd);
+        $results[] = array('txt' => outputFromCommand($cmd));
     }
+    
+    // check for failed tests 
+    $failed = preg_match('"\[ ]"', $results[0]['txt']);
+    $results[0]['class'] = ($failed) ? 'failed' : 'passed'; 
     return $results;
 }
 
@@ -50,14 +54,17 @@ $results = getAllResults();
             overflow:auto;
             padding:2px 10px;
         }
+        
+        .passed { background-color: lightgreen; } 
+        .failed { background-color: lightcoral; } 
     </style>
   </head>
   
   <body>
   
     <?php foreach ($results as $result) { ?>
-        <div>
-            <pre><?php echo $result; ?></pre>
+        <div class="<?php echo $result['class']; ?>">
+            <pre><?php echo $result['txt']; ?></pre>
         </div>
     <?php } ?>
     

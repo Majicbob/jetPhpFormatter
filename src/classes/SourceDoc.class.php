@@ -20,6 +20,9 @@ class SourceDoc
      */
     public $name;
     
+    /**
+     * @var array Of Rules classes
+     */
     public $rules;
 
     /**
@@ -49,13 +52,18 @@ class SourceDoc
     /**
      * Prints token line number, trimmed value, name and code
      */
-    function printTokenInfo()
+    public function printTokenInfo()
     {
         foreach ($this->tokens as $t) {
             echo $t;
         }
     }
 
+    public function addRule(AbstractRule $rule)
+    {
+        $this->rules[] = $rule;
+    }
+    
     /**
      * Gets all tokens and looks ups symbolic name when avaliable
      * @param  string  $code  PHP code to get detailed tokens from

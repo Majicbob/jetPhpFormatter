@@ -29,4 +29,14 @@ class SourceDocClassTest extends PHPUnit_Framework_TestCase
         
         $this->assertEquals($numRawTokens, $numTokenObjects);
     }
+    
+    public function testAddRule()
+    {
+        $doc = new SourceDoc();
+        $rule = new jet\Formatter\NoWhitespaceRule();
+        $doc->addRule($rule);
+        $addedRule = $doc->rules[0]; 
+        $this->assertTrue($addedRule instanceof jet\Formatter\AbstractRule);
+        
+    }
 }

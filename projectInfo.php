@@ -43,21 +43,7 @@ $results = getAllResults();
 <html>
   <head>
     <title>jetPhpFormatter Project Info</title>
-    <style>
-        body {
-            background-color:#6699ff;
-        }
-        div {
-            background-color:#ffebd4;
-            border:1px solid black;
-            margin: 25px 10px;
-            overflow:auto;
-            padding:2px 10px;
-        }
-        
-        .passed { background-color: lightgreen; } 
-        .failed { background-color: lightcoral; } 
-    </style>
+    <link rel="stylesheet" type="text/css" href="jetPhpFormatter.css" />
   </head>
   
   <body>

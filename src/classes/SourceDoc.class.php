@@ -6,7 +6,7 @@
  *
  * @package  jetPhpFormatter
  * @author   John Tribolet <john@tribolet.info>
- * @version  0.0.2
+ * @version  0.0.3
  * @since    02:21 Wednesday, April 18, 2012
  * @filesource
  */
@@ -43,6 +43,16 @@ class SourceDoc
     public function parseFile($filePath)
     {
         $code         = file_get_contents($filePath);
+        $this->tokens = $this->getTokens($code);
+    }
+    
+    /**
+     * Reads given string and populates $tokens
+     *
+     * @param string code
+     */
+    public function parseFile($code)
+    {
         $this->tokens = $this->getTokens($code);
     }
     

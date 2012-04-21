@@ -22,6 +22,44 @@ $testFile  = "$testDir/testFile.php";
 $testFile2 = "$testDir/testFile2.php";
 $testFile3 = "$testDir/testFile3.php";
 
-$doc = new SourceDoc();
-$doc->parseFile($testFile3);
-$doc->printTokenInfo();
+function showPreview($file)
+{
+    $doc = new SourceDoc();
+    $doc->parseFile($file);
+    $doc->rules[] = new SpaceAroundOperatorsRule();
+    $doc->rules[] = new SpaceAfterFlowControlRule();
+    $doc->applyRules();
+    $formatted = htmlentities($doc->newTokensToString());
+    $original  = htmlentities(file_get_contents($file));
+    return array('a' => $original, 'b' => $formatted);
+}
+
+$results = showPreview($testFile);
+$before  = $results['a'];
+$after   = $results['b'];
+
+
+?>
+
+<html>
+  <head>
+    <title>jetPhpFormatter - Preview</title>
+    <link rel="stylesheet" type="text/css" href="/jetPhpFormatter/jetPhpFormatter.css" />
+  </head>
+  
+  <body>
+    <div class="right">
+        <h3>After</h3>
+        <hr />
+        <pre><?php echo $after; ?></pre>
+    </div>
+    <div class="left">
+        <h3>Before</h3>
+        <hr />
+        <pre><?php echo $before; ?></pre>
+    </div>
+    
+    
+    
+  </body>
+</html>

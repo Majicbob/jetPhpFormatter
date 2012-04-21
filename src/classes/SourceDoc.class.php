@@ -19,6 +19,8 @@ class SourceDoc
      * @var string Document name
      */
     public $name;
+    
+    public $rules;
 
     /**
      * @var array Array of Token objects
@@ -50,19 +52,7 @@ class SourceDoc
     function printTokenInfo()
     {
         foreach ($this->tokens as $t) {
-            if ($t->code == T_WHITESPACE) {
-                //continue;
-            }
-
-            $name = sprintf("%30s[%03d]", $t->name, $t->code);
-            if ($t->code == 0) {
-                $name = '';
-            }
-
-            printf("
-                #%03d %03d  %03d-%03d  %5s  %s \n",
-                $t->lineNum, $t->length, $t->startPos, $t->endPos,
-                $t->trimVal(), $name);
+            echo $t;
         }
     }
 

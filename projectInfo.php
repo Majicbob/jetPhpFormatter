@@ -61,3 +61,5 @@ $results = getAllResults();
     
   </body>
 </html>
+
+<?php phpinfo(); ?>
